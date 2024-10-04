@@ -40,7 +40,9 @@
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // 2. Prepare and execute a query
-        $stmt = $conn->query("SELECT * FROM companies");
+        $stmt = $conn->query("
+        SELECT * FROM companies
+        ORDER BY (earnings_yield+return_on_equity) DESC;");
 
         // 3. Fetch and display the results in an HTML table
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
