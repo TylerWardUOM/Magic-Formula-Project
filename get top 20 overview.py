@@ -35,5 +35,5 @@ for symbol in top_20_companies:
     # Convert responses to JSON
     overview_data = overview_response.json()
 
-    with open(f'{symbol}_overview_sheet.json', 'w') as balance_file:
+    with open(f'C:/Users/tman0/OneDrive/Documents/Code/Magic Formula Project/Companies Data/{symbol}_overview_sheet.json', 'w') as balance_file:
         json.dump(overview_data, balance_file, indent=4)

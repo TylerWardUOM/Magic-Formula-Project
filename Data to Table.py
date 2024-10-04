@@ -44,7 +44,7 @@ top_20_companies = [
     'BABA'    # Alibaba
 ]
 for symbol in top_20_companies:
-    with open(f'C:/Users/tman0/OneDrive/Documents/Code/Magic Formula Project/{symbol}_overview_sheet.json', 'r') as json_file:
+    with open(f'C:/Users/tman0/OneDrive/Documents/Code/Magic Formula Project/Companies Data/{symbol}_overview_sheet.json', 'r') as json_file:
         overview_data = json.load(json_file)
     try:
         EVToEBITDA = float(overview_data["EVToEBITDA"])

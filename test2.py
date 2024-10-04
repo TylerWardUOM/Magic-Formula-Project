@@ -3,13 +3,13 @@ companies=['AAPL','NVDA','MSFT']
 for x in range(0,10):
     for i in companies:
         symbol=i
-        with open(f'C:/Users/tman0/OneDrive/Documents/Code/Magic Formula Project/{symbol}_balance_sheet.json', 'r') as json_file:
+        with open(f'C:/Users/tman0/OneDrive/Documents/Code/Magic Formula Project/Companies Data/{symbol}_balance_sheet.json', 'r') as json_file:
             balance_data = json.load(json_file)
-        with open(f'C:/Users/tman0/OneDrive/Documents/Code/Magic Formula Project/{symbol}_cash_flow_sheet.json', 'r') as json_file:
+        with open(f'C:/Users/tman0/OneDrive/Documents/Code/Magic Formula Project/Companies Data/{symbol}_cash_flow_sheet.json', 'r') as json_file:
             cashflow_data = json.load(json_file)
-        with open(f'C:/Users/tman0/OneDrive/Documents/Code/Magic Formula Project/{symbol}_income_statement.json', 'r') as json_file:
+        with open(f'C:/Users/tman0/OneDrive/Documents/Code/Magic Formula Project/Companies Data/{symbol}_income_statement.json', 'r') as json_file:
             income_data = json.load(json_file)
-        with open(f'C:/Users/tman0/OneDrive/Documents/Code/Magic Formula Project/{symbol}_overview_sheet.json', 'r') as json_file:
+        with open(f'C:/Users/tman0/OneDrive/Documents/Code/Magic Formula Project/Companies Data/{symbol}_overview_sheet.json', 'r') as json_file:
             overview_data = json.load(json_file)        # Extracting the most recent annual report data
         # Income Statement
         net_income = float(income_data['quarterlyReports'][x]['netIncome'])  # Net Income
