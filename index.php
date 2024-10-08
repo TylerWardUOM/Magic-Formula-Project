@@ -29,7 +29,7 @@
     <tr>
         <th>Symbol</th>
         <th>Company Name</th>
-        <th>Earnings Yield</th>
+        <th>PERatio</th>
         <th>Return on Equity</th>
     </tr>
 
@@ -41,15 +41,14 @@
 
         // 2. Prepare and execute a query
         $stmt = $conn->query("
-        SELECT * FROM companies
-        ORDER BY (earnings_yield+return_on_equity) DESC;");
+        SELECT * FROM companies");
 
         // 3. Fetch and display the results in an HTML table
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars($row['symbol']) . "</td>";
             echo "<td>" . htmlspecialchars($row['company_name']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['earnings_yield']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['PERatio']) . "</td>";
             echo "<td>" . htmlspecialchars($row['return_on_equity']) . "</td>";
             echo "</tr>";
         }

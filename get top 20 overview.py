@@ -1,26 +1,32 @@
 import requests
 import json
 top_20_companies = [
-    'AAPL',   # Apple
-    'MSFT',   # Microsoft
-    'GOOGL',  # Alphabet (Google)
-    'AMZN',   # Amazon
-    'NVDA',   # Nvidia
-    'TSLA',   # Tesla
-    'META',   # Meta Platforms (Facebook)
-    'BRK.B',  # Berkshire Hathaway
-    'TSM',    # Taiwan Semiconductor
-    'V',      # Visa
-    'JNJ',    # Johnson & Johnson
-    'XOM',    # Exxon Mobil
-    'WMT',    # Walmart
-    'LVMUY',  # LVMH Moet Hennessy Louis Vuitton
-    'PG',     # Procter & Gamble
-    'NSRGY',  # Nestlé
-    'MA',     # Mastercard
-    'UNH',    # UnitedHealth Group
-    'HD',     # Home Depot
-    'BABA'    # Alibaba
+    'PDD',
+    'MRK',
+    'NVS',
+    'JPM',
+    'BRK.A',
+    'PEP',
+    'MCD',
+    'NVO',
+    'SHELL',
+    'ACN',
+    'BAC',
+    'KO',
+    'ADBE',
+    'CVX',
+    'CSCO',
+    'TSM',
+    'ASML',
+    'LLY',
+    'IBM',
+    'WMT',
+    'TMUS',
+    'UNH',
+    'ABBV',
+    'AZN',
+    'TMO',
+    'COST'
 ]
 
 # Set up API key and symbol

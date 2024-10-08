@@ -1,5 +1,43 @@
 import json
 import sqlite3
+import yfinance as yf
+
+# Function to calculate ROC
+def calculate_roc(ticker):
+    # Get the stock data
+    stock = yf.Ticker(ticker)
+
+    # Fetch annual financials
+    income_statement = stock.financials
+    balance_sheet = stock.balance_sheet
+
+    # Retrieve the most recent annual values
+    # Using .iloc[0] ensures we get the latest available value
+    operating_income = income_statement.loc['Operating Income'].iloc[0]
+    total_assets = balance_sheet.loc['Total Assets'].iloc[0]
+    current_liabilities = balance_sheet.loc['Current Liabilities'].iloc[0]
+    total_debt = balance_sheet.loc['Total Debt'].iloc[0]  # Ensure to handle leases if applicable
+    total_equity = balance_sheet.loc['Ordinary Shares Number'].iloc[0]  # Adjust according to your data structure
+
+    # Assuming a tax rate; use the latest effective tax rate for accuracy
+    tax_rate = 0.21  # Example: 21% corporate tax rate
+
+    # Calculate NOPAT
+    nopat = operating_income * (1 - tax_rate)
+
+    # Calculate Capital Employed using total assets and current liabilities
+    capital_employed = total_assets - current_liabilities
+
+    # Alternatively, if you want to use total equity and total debt
+    # capital_employed = total_equity + total_debt
+
+    # Calculate ROC
+    roc = nopat / capital_employed
+
+    return roc
+
+# Example usage
+
 
 # 1. Connect to the SQLite database (or create it if it doesn't exist)
 conn = sqlite3.connect('results.db')
@@ -78,6 +116,8 @@ for symbol in top_20_companies:
         PERatio = float(overview_data["PERatio"])
         ROE = float(overview_data["ReturnOnEquityTTM"])
         ROE = float(overview_data["EBITDA"])/float(overview_data["MarketCapitalization"])
+        ROE = calculate_roc(symbol)
+        print(f"Return on Capital (ROC) for {symbol}: {ROE:.2%}")
 
         print(f"PE Ratio of {symbol}: {PERatio:.2%}")
         print(f"Return on Equity (ROE) of {symbol}: {ROE:.2%}")
