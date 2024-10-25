@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="MAGIC FORMULA">
+    <title>Magic Formula</title>
+    <link rel="icon" href="th.jpg" type="image/x-icon">
+
+    <style>
+        table {
+            font-family: Arial, sans-serif;
+            font-size: medium;
+            border-collapse: collapse;
+            margin-left: 220px;  /* Space from the left sidebar */
+            width: calc(100% - 455px);
+        }
+
+        th {
+            text-align: center;
+            border: 1px solid #dddddd;
+            font-size: large;
+        }
+
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding-left: 1%;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #dddddd;
+        }
+
+        .Thead {
+            background-color: gold;
+            font-size: 30px;
+            font-family: 'Roboto', sans-serif;
+            padding-top: 10px;
+        }
+
+        .N {
+            text-align: center;
+            border: 1px solid #dddddd;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 15px 20px;
+            margin-bottom: 100px;
+        }
+
+        .navbar .brand {
+            font-size: 22px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-left: 200px;
+        }
+
+        .navbar .brand img {
+            width: 30px;  /* Adjust size as needed */
+            height: 30px; /* Adjust size as needed */
+            margin-right: 10px; /* Space between icon and text */
+        }
+
+        /* Navigation links on the right */
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding-right: 200px;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            transition: background-color 0.3s;
+        }
+
+        /* Link hover effect */
+        .navbar ul li a:hover {
+            background-color: #575757;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="brand">
+        <img src="th.jpg" alt="Logo"> <!-- Icon image -->
+        Magic Formula
+    </div>
+
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</div>
+
+
+<table>
+    <tr>
+        <th class="Thead" colspan="3">RankTable</th>
+    </tr>
+    <tr>
+        <td class="N">Company</td>
+        <td class="N">P/E Ratio</td>
+        <td class="N">ROIC</td>
+    </tr>
+    <tbody id="tableBody"> 
+        <!-- Rows will be inserted here by JavaScript -->
+    </tbody>
+</table>
+
+<!-- Link to external JavaScript file to populate the table -->
+<script type="module" src="Data.js"></script>
+
+</body>
+</html>
