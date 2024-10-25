@@ -11,28 +11,34 @@
             font-family: Arial, sans-serif;
             font-size: medium;
             border-collapse: collapse;
-            margin-left: 220px;  /* Space from the left sidebar */
-            width: calc(100% - 455px);
+            width: calc(100%);
+            border-radius: 10px; /* Rounded edges */
+            overflow: hidden; /* Prevents border-radius from being visible on overflow */
         }
 
         th {
             text-align: center;
             border: 1px solid #dddddd;
             font-size: large;
+            background-color: gold;
+            color: #333; /* Dark text for headers */
+            padding: 10px; /* Padding for headers */
+            font-weight: bold; /* Make headers bold */
+        }
+
+        .header {
+            background-color: lightgray; /* Light red for Company */
         }
 
         td {
             border: 1px solid #dddddd;
             text-align: left;
-            padding-left: 1%;
-        }
-
-        tr:nth-child(odd) {
-            background-color: #dddddd;
+            padding: 8px; /* Padding for data cells */
+            color: #555; /* Darker gray for data text */
+            background-color: #fff; /* White background for data cells */
         }
 
         .Thead {
-            background-color: gold;
             font-size: 30px;
             font-family: 'Roboto', sans-serif;
             padding-top: 10px;
@@ -54,7 +60,7 @@
             align-items: center;
             background-color: #333;
             padding: 15px 20px;
-            margin-bottom: 100px;
+            margin-bottom: 20px; /* Adjusted to allow space for the table */
         }
 
         .navbar .brand {
@@ -62,7 +68,7 @@
             color: white;
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding-left: 200px;
+            padding-left: 15vw;
         }
 
         .navbar .brand img {
@@ -95,6 +101,15 @@
             background-color: #575757;
             border-radius: 4px;
         }
+
+        /* Container for the table with fixed height and scroll */
+        .table-container {
+            height: 70vh; /* Set to a percentage of the viewport height */
+            overflow-y: auto; /* Enable vertical scrolling */
+            margin-left: 15vw; /* Space from the left sidebar to match the table */
+            width: 50vw; /* Same width as the table */
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>
@@ -113,20 +128,22 @@
     </ul>
 </div>
 
-
-<table>
-    <tr>
-        <th class="Thead" colspan="3">RankTable</th>
-    </tr>
-    <tr>
-        <td class="N">Company</td>
-        <td class="N">P/E Ratio</td>
-        <td class="N">ROIC</td>
-    </tr>
-    <tbody id="tableBody"> 
-        <!-- Rows will be inserted here by JavaScript -->
-    </tbody>
-</table>
+<!-- Table Container -->
+<div class="table-container">
+    <table>
+        <tr>
+            <th class="Thead" colspan="3">RankTable</th>
+        </tr>
+        <tr>
+            <td class="header N">Company</td>
+            <td class="header N">P/E Ratio</td>
+            <td class="header N">ROC</td>
+        </tr>
+        <tbody id="tableBody"> 
+            <!-- Rows will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+</div>
 
 <!-- Link to external JavaScript file to populate the table -->
 <script type="module" src="Data.js"></script>

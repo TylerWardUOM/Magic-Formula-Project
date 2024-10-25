@@ -1,6 +1,6 @@
 import config from './config.js';
 
-const range = 'MEGA CAP!A1:G100';
+const range = 'Sheet4!A1:G100';
 const sheetURL = `https://sheets.googleapis.com/v4/spreadsheets/${config.sheetID}/values/${range}?key=${config.apiKey}`;
 
 
@@ -27,6 +27,11 @@ fetch(sheetURL)
             const gValue = row[6] || ''; // Column G (index 6)
             const bValue = row[1] || ''; // Column B (index 1)
             const dValue = row[3] || ''; // Column D (index 3)
+
+            // Check for error values
+            if (gValue === '#VALUE!' || bValue === '#VALUE!' || dValue === 'ROC data not found') {
+            continue; // Skip this row if any of the specified columns have an error
+            }
 
             // Create a new table row and add the cells
             const tableRow = document.createElement('tr');
