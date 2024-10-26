@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About - Magic Formula</title>
+    <link rel="icon" href="th.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+</head>
+<body>
+
+<!-- Load header from header.html -->
+<div id="header"></div>
+
+<script>
+    fetch("header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("header").innerHTML = data;
+        });
+</script>
+
+<!-- About Content -->
+<div class="content">
+    <h1>About the Magic Formula</h1>
+    <p>The Magic Formula is an investment strategy developed by Joel Greenblatt, a renowned value investor. This strategy is designed to help individual investors systematically identify undervalued companies with high potential for long-term growth.</p>
+    
+    <h2>How the Magic Formula Works</h2>
+    <p>The Magic Formula relies on two key financial metrics to assess companies:</p>
+    
+    <ol>
+        <li><strong>Return on Capital (ROC):</strong> This measures how effectively a company generates profit from its investments. A higher ROC indicates that the company is generating more profit per dollar of invested capital, which is a sign of operational efficiency and profitability.</li>
+        
+        <li><strong>Earnings Yield (EY):</strong> This metric compares the company's earnings to its stock price, providing a way to determine how much "bang for the buck" investors are getting. A higher earnings yield can indicate that a stock is undervalued.</li>
+    </ol>
+    
+    <h2>Applying the Magic Formula to Beat the Market</h2>
+    <p>By ranking companies based on their ROC and EY, the Magic Formula aims to identify stocks that combine strong profitability with attractive valuations. Here’s a simplified guide on how to apply the Magic Formula in your portfolio:</p>
+    
+    <ul>
+        <li><strong>Step 1:</strong> Choose a list of companies from a broad market index (e.g., the S&P 500) and filter out financial and utility sectors, which may not be ideal for this formula.</li>
+        
+        <li><strong>Step 2:</strong> Rank the remaining companies based on both ROC and EY. Each company receives two rankings, one for each metric.</li>
+        
+        <li><strong>Step 3:</strong> Calculate the combined ranking for each company by adding its ROC and EY ranks. Companies with the lowest combined ranks are considered the best investments under the Magic Formula.</li>
+        
+        <li><strong>Step 4:</strong> Invest in a select group of the top-ranked companies, typically over a 1-year period. Regularly rebalance the portfolio by selling underperformers and reinvesting in new top-ranked stocks.</li>
+    </ul>
+    
+    <h2>Benefits of the Magic Formula</h2>
+    <p>While no strategy is foolproof, the Magic Formula is based on fundamental value investing principles that aim to minimize risk and capitalize on long-term growth. Studies have shown that this strategy can deliver significant returns over time by focusing on quality companies trading at attractive valuations.</p>
+    
+    <p>However, it’s essential to remain patient and consistent with this approach, as the formula’s success typically becomes evident over longer time horizons.</p>
+    
+    <h3>Learn More</h3>
+    <p>Interested in exploring further? The Magic Formula is outlined in detail in Joel Greenblatt's book, <em>The Little Book That Still Beats the Market</em>, which is a great resource for understanding the nuances of this investment strategy.</p>
+</div>
+
+</body>
+</html>

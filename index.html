@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Magic Formula</title>
+    <link rel="icon" href="th.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+</head>
+<body>
+
+<!-- Load header from header.html -->
+<div id="header"></div>
+
+<script>
+    fetch("header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("header").innerHTML = data;
+        });
+</script>
+
+<!-- Rest of the content -->
+<div class="table-container">
+    <table>
+        <tr>
+            <th class="Thead" colspan="3">RankTable</th>
+        </tr>
+        <tr>
+            <td class="header N">Company</td>
+            <td class="header N">P/E Ratio</td>
+            <td class="header N">ROC</td>
+        </tr>
+        <tbody id="tableBody">
+            <!-- Rows inserted by JavaScript -->
+        </tbody>
+    </table>
+</div>
+
+<script type="module" src="Data.js"></script>
+</body>
+</html>

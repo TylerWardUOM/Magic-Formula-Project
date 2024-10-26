@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About - Magic Formula</title>
+    <link rel="icon" href="th.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+</head>
+<body>
+
+<!-- Load header from header.html -->
+<div id="header"></div>
+
+<script>
+    fetch("header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("header").innerHTML = data;
+        });
+</script>
+
+<!-- contact Content -->
+<div class="content">
+    <h1>Contact</h1>
+    <p>Contact us</p>
+</div>
+
+</body>
+</html>
