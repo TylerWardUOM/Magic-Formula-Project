@@ -31,6 +31,7 @@ td {
     padding: 8px; /* Adds padding inside each data cell */
     color: #555; /* Medium gray text color */
     background-color: #fff; /* White background color for data cells */
+    text-align: center;
 }
 
 /* Custom header class (Thead) */
@@ -159,4 +160,22 @@ body {
 
 .content p em {
     color: #555; /* Styled italic text */
+}
+
+/* Button styles */
+button {
+    width: 100%; /* Make the button span the entire cell */
+    border: none; /* Remove border */
+    background-color:  white; /* Background color */
+    color: black; /* Text color */
+    padding: 10px; /* Padding inside the button */
+    cursor: pointer; /* Change cursor to pointer */
+    font-size: 16px; /* Font size */
+    border-radius: 5px; /* Rounded corners */
+    
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: lightgray; /* Darker background on hover */
 }
