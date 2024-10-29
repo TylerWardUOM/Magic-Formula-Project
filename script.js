@@ -22,6 +22,11 @@ async function handleSubmit(event) {
 
     console.log('Payload:', payload); // Log the payload
 
+    // Change the submit button to loading state
+    const submitButton = document.getElementById('submit-button'); // Assuming your button has this ID
+    submitButton.disabled = true; // Disable the button
+    submitButton.innerText = 'Loading...'; // Change the button text
+
     try {
         // Make an API request
         const response = await fetch('http://localhost:3000/api/investment', {
@@ -48,6 +53,10 @@ async function handleSubmit(event) {
     } catch (error) {
         console.error('Error:', error);
         document.getElementById('results').innerText = 'An error occurred while calculating projections.';
+    }finally {
+        // Re-enable the button and reset text after processing
+        submitButton.disabled = false; // Re-enable the button
+        submitButton.innerText = 'Submit'; // Reset the button text
     }
 }
 // Function to display results
