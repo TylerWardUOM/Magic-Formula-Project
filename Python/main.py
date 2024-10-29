@@ -1,125 +1,52 @@
+import yfinance as yf
 import scrapers
 import sqlite3
 
 # Define the top 50 companies with their tickers and exchanges
 top_50_companies = [
-    ("AAPL", "NASDAQ"),    # Apple Inc.
-    ("MSFT", "NASDAQ"),    # Microsoft Corp.
-    ("GOOGL", "NASDAQ"),   # Alphabet Inc. (Class A)
-    ("GOOG", "NASDAQ"),    # Alphabet Inc. (Class C)
-    ("AMZN", "NASDAQ"),    # Amazon.com Inc.
-    ("NVDA", "NASDAQ"),    # NVIDIA Corp.
-    ("TSLA", "NASDAQ"),    # Tesla Inc.
-    ("META", "NASDAQ"),    # Meta Platforms Inc.
-    ("BRK.B", "NYSE"),     # Berkshire Hathaway Inc. (Class B)
-    ("V", "NYSE"),         # Visa Inc.
-    ("JNJ", "NYSE"),       # Johnson & Johnson
-    ("XOM", "NYSE"),       # Exxon Mobil Corp.
-    ("WMT", "NYSE"),       # Walmart Inc.
-    ("JPM", "NYSE"),       # JPMorgan Chase & Co.
-    ("PG", "NYSE"),        # Procter & Gamble Co.
-    ("MA", "NYSE"),        # Mastercard Inc.
-    ("LLY", "NYSE"),       # Eli Lilly and Co.
-    ("CVX", "NYSE"),       # Chevron Corp.
-    ("KO", "NYSE"),        # Coca-Cola Co.
-    ("PEP", "NASDAQ"),     # PepsiCo Inc.
-    ("MRK", "NYSE"),       # Merck & Co. Inc.
-    ("ABBV", "NYSE"),      # AbbVie Inc.
-    ("AVGO", "NASDAQ"),    # Broadcom Inc.
-    ("COST", "NASDAQ"),    # Costco Wholesale Corp.
-    ("CSCO", "NASDAQ"),    # Cisco Systems Inc.
-    ("TMO", "NYSE"),       # Thermo Fisher Scientific Inc.
-    ("NKE", "NYSE"),       # Nike Inc.
-    ("MCD", "NYSE"),       # McDonald's Corp.
-    ("ORCL", "NYSE"),      # Oracle Corp.
-    ("ACN", "NYSE"),       # Accenture plc
-    ("LIN", "NYSE"),       # Linde plc
-    ("TXN", "NASDAQ"),     # Texas Instruments Inc.
-    ("VZ", "NYSE"),        # Verizon Communications Inc.
-    ("ABT", "NYSE"),       # Abbott Laboratories
-    ("PM", "NYSE"),        # Philip Morris International Inc.
-    ("DHR", "NYSE"),       # Danaher Corp.
-    ("MDT", "NYSE"),       # Medtronic plc
-    ("MS", "NYSE"),        # Morgan Stanley
-    ("NEE", "NYSE"),       # NextEra Energy Inc.
-    ("UPS", "NYSE"),       # United Parcel Service Inc.
-    ("UNH", "NYSE"),       # UnitedHealth Group Inc.
-    ("CMCSA", "NASDAQ"),   # Comcast Corp.
-    ("ADBE", "NASDAQ"),    # Adobe Inc.
-    ("QCOM", "NASDAQ"),    # Qualcomm Inc.
-    ("HON", "NASDAQ"),     # Honeywell International Inc.
-    ("PYPL", "NASDAQ"),    # PayPal Holdings Inc.
-    ("IBM", "NYSE"),       # IBM Corp.
-    ("NFLX", "NASDAQ"),    # Netflix Inc.
-    ("BMY", "NYSE"),       # Bristol-Myers Squibb Co.
-    ("AMD", "NASDAQ"),     # Advanced Micro Devices Inc.
-    ("INTC", "NASDAQ")     # Intel Corp.
+    ("AAPL", "NASDAQ"), ("MSFT", "NASDAQ"), ("GOOGL", "NASDAQ"), ("GOOG", "NASDAQ"),
+    ("AMZN", "NASDAQ"), ("NVDA", "NASDAQ"), ("TSLA", "NASDAQ"), ("META", "NASDAQ"),
+    ("BRK.B", "NYSE"), ("V", "NYSE"), ("JNJ", "NYSE"), ("XOM", "NYSE"), ("WMT", "NYSE"),
+    ("JPM", "NYSE"), ("PG", "NYSE"), ("MA", "NYSE"), ("LLY", "NYSE"), ("CVX", "NYSE"),
+    ("KO", "NYSE"), ("PEP", "NASDAQ"), ("MRK", "NYSE"), ("ABBV", "NYSE"), ("AVGO", "NASDAQ"),
+    ("COST", "NASDAQ"), ("CSCO", "NASDAQ"), ("TMO", "NYSE"), ("NKE", "NYSE"), ("MCD", "NYSE"),
+    ("ORCL", "NYSE"), ("ACN", "NYSE"), ("LIN", "NYSE"), ("TXN", "NASDAQ"), ("VZ", "NYSE"),
+    ("ABT", "NYSE"), ("PM", "NYSE"), ("DHR", "NYSE"), ("MDT", "NYSE"), ("MS", "NYSE"),
+    ("NEE", "NYSE"), ("UPS", "NYSE"), ("UNH", "NYSE"), ("CMCSA", "NASDAQ"), ("ADBE", "NASDAQ"),
+    ("QCOM", "NASDAQ"), ("HON", "NASDAQ"), ("PYPL", "NASDAQ"), ("IBM", "NYSE"), ("NFLX", "NASDAQ"),
+    ("BMY", "NYSE"), ("AMD", "NASDAQ"), ("INTC", "NASDAQ")
 ]
 
-sheets_list = [
-    ("JPM", "NYSE"),
-    ("BAC", "NYSE"),
-    ("PDD", "NASDAQ"),
-    ("MRK", "NYSE"),
-    ("GOOG", "NASDAQ"),
-    ("HD", "NYSE"),
-    ("NVS", "NYSE"),
-    ("BRK.A", "NYSE"),
-    ("AAPL", "NASDAQ"),
-    ("PEP", "NASDAQ"),
-    ("XOM", "NYSE"),
-    ("V", "NYSE"),
-    ("MCD", "NYSE"),
-    ("SHEL", "NYSE"),
-    ("NVO", "NYSE"),
-    ("META", "NASDAQ"),
-    ("MA", "NYSE"),
-    ("ASML", "NASDAQ"),
-    ("PG", "NYSE"),
-    ("TSM", "NYSE"),
-    ("ACN", "NYSE"),
-    ("JNJ", "NYSE"),
-    ("NVDA", "NASDAQ"),
-    ("MSFT", "NASDAQ"),
-    ("CVX", "NYSE"),
-    ("ADBE", "NASDAQ"),
-    ("CSCO", "NASDAQ"),
-    ("KO", "NYSE"),
-    ("KO", "NYSE"),  # Duplicate entry
-    ("COST", "NASDAQ"),
-    ("BABA", "NYSE"),
-    ("LLY", "NYSE"),
-    ("TMUS", "NASDAQ"),
-    ("UNH", "NYSE"),
-    ("WMT", "NYSE"),
-    ("AZN", "NASDAQ"),
-    ("ABBV", "NYSE"),
-    ("IBM", "NYSE"),
-    ("ORCL", "NYSE"),
-    ("TMO", "NYSE"),
-    ("AMZN", "NASDAQ"),
-    ("SAP", "NYSE"),
-    ("TSLA", "NASDAQ"),
-    ("CRM", "NYSE"),
-    ("AVGO", "NASDAQ"),
-    ("AMD", "NASDAQ")
-]
+# Define a list of (ticker, exchange) pairs to process
+sheets_list = [("JPM", "NYSE"), ("BAC", "NYSE"), ("PDD", "NASDAQ"), ("MRK", "NYSE"),
+               ("GOOG", "NASDAQ"), ("HD", "NYSE"), ("NVS", "NYSE"), ("BRK.A", "NYSE"),
+               ("AAPL", "NASDAQ"), ("PEP", "NASDAQ"), ("XOM", "NYSE"), ("V", "NYSE"),
+               ("MCD", "NYSE"), ("SHEL", "NYSE"), ("NVO", "NYSE"), ("META", "NASDAQ"),
+               ("MA", "NYSE"), ("ASML", "NASDAQ"), ("PG", "NYSE"), ("TSM", "NYSE"),
+               ("ACN", "NYSE"), ("JNJ", "NYSE"), ("NVDA", "NASDAQ"), ("MSFT", "NASDAQ"),
+               ("CVX", "NYSE"), ("ADBE", "NASDAQ"), ("CSCO", "NASDAQ"), ("KO", "NYSE"),
+               ("COST", "NASDAQ"), ("BABA", "NYSE"), ("LLY", "NYSE"), ("TMUS", "NASDAQ"),
+               ("UNH", "NYSE"), ("WMT", "NYSE"), ("AZN", "NASDAQ"), ("ABBV", "NYSE"),
+               ("IBM", "NYSE"), ("ORCL", "NYSE"), ("TMO", "NYSE"), ("AMZN", "NASDAQ"),
+               ("SAP", "NYSE"), ("TSLA", "NASDAQ"), ("CRM", "NYSE"), ("AVGO", "NASDAQ"),
+               ("AMD", "NASDAQ")]
 
-
-# Connect to SQLite database (or create it if it doesn't exist)
+# Connect to SQLite database
 conn = sqlite3.connect('companies.db')
 c = conn.cursor()
 
-# Create table for storing company data if it doesn't exist
-c.execute('''
+# Create table if it doesn't exist, including exchange column
+c.execute(''' 
     CREATE TABLE IF NOT EXISTS company_data (
         ticker TEXT PRIMARY KEY,
+        exchange TEXT,            -- Add exchange column
         pe_ratio REAL,
-        roc REAL
+        roc REAL,
+        combined_rank REAL
     )
 ''')
 
-# Function to rank the values
+# Function to rank values
 def rank_values(values):
     sorted_values = sorted(enumerate(values), key=lambda x: x[1])
     ranks = [0] * len(values)
@@ -131,34 +58,59 @@ def rank_values(values):
 data = []
 
 for ticker, exchange in sheets_list:
-    pe_ratio = scrapers.scrape_pe_ratio(ticker, exchange)
-    roc = scrapers.scrape_roc(ticker, exchange)
+    # Try to fetch P/E from scraper
+    try:
+        pe_ratio = scrapers.scrape_pe_ratio(ticker, exchange)
+        if pe_ratio is None:
+            raise ValueError("No PE Ratio found from scrapers.")
+    except:
+        # Fetch trailing P/E using yfinance if scraper fails
+        try:
+            stock = yf.Ticker(ticker)
+            pe_ratio = stock.info.get("trailingPE")
+            if pe_ratio is None:
+                raise ValueError("No trailing P/E available from yfinance.")
+        except Exception as e:
+            print(f"Failed to get P/E for {ticker}: {e}")
+            pe_ratio = None
 
-    # Check if both pe_ratio and roc are valid numbers (floats)
+    # Fetch ROC from scrapers
+    try:
+        roc = scrapers.scrape_roc(ticker, exchange)
+    except Exception as e:
+        print(f"Failed to get ROC for {ticker}: {e}")
+        roc = None
+
+    # Check if both P/E and ROC are valid numbers before adding to data
     if isinstance(pe_ratio, (float, int)) and isinstance(roc, (float, int)):
-        data.append((ticker, pe_ratio, roc))
+        # Format values to two decimal places
+        pe_ratio = round(pe_ratio, 2)  # Round to 2 decimal places
+        roc = round(roc, 2)             # Round to 2 decimal places
+        data.append((ticker, exchange, pe_ratio, roc))  # Include exchange in data
 
 # Check if data has at least 1 entry before proceeding
 if data:
     # Rank P/E and ROC values
-    pe_values = [d[1] for d in data]
-    roc_values = [d[2] for d in data]
+    pe_values = [d[2] for d in data]  # Updated index for pe_ratio
+    roc_values = [d[3] for d in data]  # Updated index for roc
     pe_ranks = rank_values(pe_values)  # Lower P/E is better
     roc_ranks = rank_values([-roc for roc in roc_values])  # Higher ROC is better (inverting ROC)
 
-    # Insert data into the database
-    for (ticker, pe_ratio, roc), pe_rank, roc_rank in zip(data, pe_ranks, roc_ranks):
-        c.execute('INSERT OR REPLACE INTO company_data (ticker, pe_ratio, roc) VALUES (?, ?, ?)',
-                  (ticker, pe_ratio, roc))
+    # Calculate combined ranks
+    combined_ranks = [pe_rank + roc_rank for pe_rank, roc_rank in zip(pe_ranks, roc_ranks)]
 
+    # Insert data with combined ranks into the database
+    for (ticker, exchange, pe_ratio, roc), combined_rank in zip(data, combined_ranks):
+        c.execute('INSERT OR REPLACE INTO company_data (ticker, exchange, pe_ratio, roc, combined_rank) VALUES (?, ?, ?, ?, ?) ',
+                  (ticker, exchange, pe_ratio, roc, combined_rank))
     # Commit changes
     conn.commit()
 
     # Now fetch and sort the data based on combined ranks
-    c.execute('''
-        SELECT ticker, pe_ratio, roc 
+    c.execute(''' 
+        SELECT ticker, exchange, pe_ratio, roc 
         FROM company_data
-        ORDER BY (SELECT COUNT(*) FROM company_data) - pe_ratio + roc DESC
+        ORDER BY combined_rank DESC
     ''')
 
     # Display the sorted data

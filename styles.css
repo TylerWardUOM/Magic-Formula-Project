@@ -1,181 +1,263 @@
 /* General table styles */
 table {
-    font-family: Arial, sans-serif; /* Sets the font for the entire table */
-    font-size: medium; /* Medium font size for table text */
-    border-collapse: collapse; /* Collapses borders into a single border */
-    width: calc(100%); /* Table width set to fill the available space */
-    border-radius: 10px; /* Adds rounded corners to the table */
-    overflow: hidden; /* Prevents rounded edges from being cut off if content overflows */
+    font-family: Arial, sans-serif;
+    font-size: medium;
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 /* Header cell (th) styles */
 th {
-    text-align: center; /* Centers text within each header cell */
-    border: 1px solid #dddddd; /* Light gray border around each header cell */
-    font-size: large; /* Larger font size for header text */
-    background-color: gold; /* Gold background color for headers */
-    color: #333; /* Dark gray text color */
-    padding: 10px; /* Adds padding inside each header cell */
-    font-weight: bold; /* Makes header text bold */
+    text-align: center;
+    border: 1px solid #dddddd;
+    font-size: large;
+    background-color: gold;
+    color: #333;
+    padding: 10px;
+    font-weight: bold;
 }
 
 /* Header row style for additional styling */
 .header {
-    background-color: lightgray; /* Sets a light gray background for the header row */
+    background-color: lightgray;
 }
 
 /* Data cell (td) styles */
 td {
-    border: 1px solid #dddddd; /* Light gray border around each data cell */
-    text-align: left; /* Aligns text to the left within each cell */
-    padding: 8px; /* Adds padding inside each data cell */
-    color: #555; /* Medium gray text color */
-    background-color: #fff; /* White background color for data cells */
+    border: 1px solid #dddddd;
+    padding: 8px;
+    color: #555;
+    background-color: #fff;
     text-align: center;
 }
 
 /* Custom header class (Thead) */
 .Thead {
-    font-size: 30px; /* Larger font size for special table header */
-    font-family: 'Roboto', sans-serif; /* Custom font family for this header */
-    padding-top: 10px; /* Adds extra space above the header */
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    padding-top: 10px;
 }
 
 /* Custom cell class for centered text */
 .N {
-    text-align: center; /* Centers text within cells that use this class */
-    border: 1px solid #dddddd; /* Light gray border around these cells */
+    text-align: center;
+    border: 1px solid #dddddd;
 }
 
 /* General page body styling */
 body {
-    margin: 0; /* Removes default page margins */
-    font-family: Arial, sans-serif; /* Sets default font for the body */
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
 /* Navbar container styling */
 .navbar {
-    display: flex; /* Enables flex layout for navbar items */
-    justify-content: space-between; /* Spreads navbar items evenly with space between */
-    align-items: center; /* Centers navbar items vertically */
-    background-color: #333; /* Dark background color for the navbar */
-    padding: 15px 20px; /* Padding around navbar content */
-    margin-bottom: 20px; /* Adds space below the navbar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 20px 20px;
+    margin-bottom: 20px;
 }
 
 /* Brand/logo styling within the navbar */
 .navbar .brand {
-    font-size: 22px; /* Font size for the brand/logo text */
-    color: white; /* White text color for the brand */
-    text-transform: uppercase; /* Converts brand text to uppercase */
-    letter-spacing: 1px; /* Adds spacing between letters */
-    padding-left: 15vw; /* Adds left padding, pushing the brand to the right */
+    font-size: 22px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-left: 10vw;
+    padding-right: 30vw;
 }
 
 /* Brand/logo image styling */
 .navbar .brand img {
-    width: 30px; /* Width of the logo image */
-    height: 30px; /* Height of the logo image */
-    margin-right: 10px; /* Adds space between the logo image and brand text */
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
 }
 
 /* Navbar list (ul) styling */
 .navbar ul {
-    list-style-type: none; /* Removes default list bullets */
-    margin: 0; /* Removes default margin */
-    padding-right: 200px; /* Adds space on the right side */
-    display: flex; /* Sets up a horizontal flex layout for list items */
+    list-style-type: none;
+    margin: 0;
+    padding-right: 200px;
+    display: flex;
 }
 
 /* Navbar list item (li) styling */
 .navbar ul li {
-    margin-left: 20px; /* Adds space between each list item */
+    margin-left: 20px;
 }
 
 /* Navbar link (a) styling */
 .navbar ul li a {
-    color: white; /* Sets link text color to white */
-    text-decoration: none; /* Removes underline from links */
-    padding: 8px 16px; /* Adds padding inside each link */
-    transition: background-color 0.3s; /* Smooth transition effect for background color changes */
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
 }
 
 /* Hover effect for navbar links */
 .navbar ul li a:hover {
-    background-color: #575757; /* Darkens the background color on hover */
-    border-radius: 4px; /* Rounds link corners on hover */
+    background-color: #575757;
+    border-radius: 4px;
 }
 
 /* Container for table with fixed height and scrollability */
 .table-container {
-    height: 70vh; /* Sets height to 70% of the viewport */
-    overflow-y: auto; /* Enables vertical scrolling if content overflows */
-    margin-left: 15vw; /* Adds space on the left to align with the navbar brand */
-    width: 50vw; /* Sets container width to 50% of the viewport width */
-    box-sizing: border-box; /* Includes padding and border in width and height calculations */
+    height: 70vh;
+    overflow-y: auto;
+    width: 50vw;
+    box-sizing: border-box;
 }
 
 /* Styling specifically for the About page */
-
-/* Content container styling */
 .content {
-    max-width: 800px; /* Limits content width for easier reading */
-    margin: 40px auto; /* Centers content and adds top/bottom margin */
-    padding: 20px; /* Adds padding around content */
-    background-color: #f9f9f9; /* Light background for better contrast */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Typography improvements */
 .content h1 {
-    color: #333; /* Dark gray for main title */
-    text-align: center; /* Center-align main heading */
-    margin-bottom: 20px; /* Adds spacing below heading */
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .content h2 {
-    color: #444; /* Medium dark gray for subheadings */
-    margin-top: 30px; /* Adds spacing above subheadings */
-    border-bottom: 2px solid #ccc; /* Bottom border for emphasis */
-    padding-bottom: 8px; /* Padding to separate text from border */
+    color: #444;
+    margin-top: 30px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 8px;
 }
 
 .content p, .content ol, .content ul {
-    line-height: 1.6; /* Increased line height for readability */
-    color: #555; /* Medium gray text color */
-    margin-bottom: 20px; /* Space between paragraphs and lists */
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 20px;
 }
 
 /* Styled lists for cleaner look */
 .content ol, .content ul {
-    padding-left: 20px; /* Adds left padding for lists */
+    padding-left: 20px;
 }
 
-/* Additional styling for Learn More section */
 .content h3 {
-    color: #333; /* Dark color for emphasis */
-    margin-top: 30px; /* Extra spacing above */
+    color: #333;
+    margin-top: 30px;
 }
 
 .content p em {
-    color: #555; /* Styled italic text */
+    color: #555;
 }
 
 /* Button styles */
 button {
-    width: 100%; /* Make the button span the entire cell */
-    border: none; /* Remove border */
-    background-color:  white; /* Background color */
-    color: black; /* Text color */
-    padding: 10px; /* Padding inside the button */
-    cursor: pointer; /* Change cursor to pointer */
-    font-size: 16px; /* Font size */
-    border-radius: 5px; /* Rounded corners */
-    
+    width: 100%;
+    border: none;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: lightgray;
+}
+
+/* Flex container for table and input box */
+.content-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding-left: 10vw; /* Aligns container with navbar */
+    padding-right: 10vw;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 900px) {
+    .content-container {
+        flex-direction: column; /* Change to column layout */
+        padding-left: 0; /* Remove left padding for full width */
+    }
+
+    .table-container, .input-box {
+        width: 100%; /* Full width on mobile */
+        margin-left: 0; /* Remove left margin */
+    }
+}
+
+/* Input box styling */
+.input-box {
+    width: 50vw;
+    height: 70vh;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+/* Title for input box */
+.input-box h2 {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    margin-bottom: 50px;
+    font-size: 24px;
+}
+
+/* Form labels and inputs styling */
+.input-box label {
+    font-size: 16px;
+    color: #555;
+    display: block;
+    margin: 27px 0 5px;
+}
+
+.input-box input {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Submit button */
+.input-box button {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
 }
 
 /* Button hover effect */
-button:hover {
-    background-color: lightgray; /* Darker background on hover */
+.input-box button:hover {
+    background-color: #575757;
+}
+
+/*Style for the select dropdown*/ 
+.input-box select {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: white;
 }

@@ -56,12 +56,10 @@ def scrape_pe_ratio(ticker, exchange):
             pe_ratio_value = pe_ratio_element.find_next(class_="P6K39c").text.strip()
             return float(pe_ratio_value)
         else:
-            return "P/E Ratio data not found"
+            return None
     
     except requests.RequestException as e:
-        return f"Error fetching data: {e}"
+        return None
     except (ValueError, AttributeError) as e:
-        return "Error parsing P/E Ratio data"
+        return None
 
-print(scrape_pe_ratio("PDD","NASDAQ"))
-print(scrape_roc("PDD","NASDAQ"))
