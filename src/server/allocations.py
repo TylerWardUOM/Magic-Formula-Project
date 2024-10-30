@@ -3,12 +3,13 @@ import json
 import yfinance as yf  # Yahoo Finance library for fetching financial data
 import scrapers as scrapers  # Custom scrapers for fetching financial metrics
 import sqlite3  # SQLite library for database operations
-
+import os
 
 # Existing code (with database setup, ranking functions, etc.)
 
 # Define a function to allocate portfolio based on Magic Formula rankings
 def allocate_portfolio(risk_threshold):
+    db_path = os.path.join(os.path.dirname(__file__), 'data', 'companies.db')
     """Allocate portfolio based on top-ranked companies by combined rank.
 
     Args:
@@ -22,8 +23,11 @@ def allocate_portfolio(risk_threshold):
     min_companies = 5    # Minimum number of companies for high risk
     max_companies = 30   # Maximum number of companies for low risk
     num_companies = max_companies - ((risk_threshold - 1) * (max_companies - min_companies) // 9)
+    
     # Connect to SQLite database
-    conn = sqlite3.connect('data\companies.db')
+    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # Go up two levels
+    db_path = os.path.join(base_dir, 'data', 'companies.db')
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
     # Fetch top-ranked companies from the database

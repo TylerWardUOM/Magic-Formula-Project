@@ -13,6 +13,7 @@ require('dotenv').config(); // Load environment variables from .env file
 
 
 const app = express(); // Create an Express application
+const pycmd = process.env.pycmd || 'python'
 const PORT = process.env.PORT || 80; // Use PORT from env or default to 80
 const HOST = process.env.HOST || 'localhost'; // Use HOST from env or default to localhost
 const dbPath = path.join(__dirname, '../../data/companies.db'); // Path to the SQLite database
@@ -43,7 +44,7 @@ app.get('/', (req, res) => {
 cron.schedule('00 16 * * *', () => {
     console.log('Running Python script at:', new Date().toLocaleString());
 
-    exec(`py ${pythonScriptPath}`, (error, stdout, stderr) => {
+    exec(`${pycmd} ${pythonScriptPath}`, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error executing Python script: ${error.message}`);
             return;
@@ -60,7 +61,7 @@ cron.schedule('00 16 * * *', () => {
 app.get('/api/run_script', (req, res) => {
     console.log('Received request to run Python script...');
 
-    exec(`python ${pythonScriptPath}`, (error, stdout, stderr) => {
+    exec(`${pycmd} ${pythonScriptPath}`, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error executing Python script: ${error.message}`);
             return res.status(500).send('Failed to execute script'); // Send error response
@@ -83,7 +84,7 @@ app.post('/api/investment', (req, res) => {
     const inputData = JSON.stringify({ initialCapital, age, riskTolerance, yearlyContribution, benchmark });
 
     // Call the Python script
-    exec(`python src/server/investment_return_calculator.py "${inputData.replace(/"/g, '\\"')}"`, (error, stdout, stderr) => {
+    exec(`${pycmd} src/server/investment_return_calculator.py "${inputData.replace(/"/g, '\\"')}"`, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error executing Python script: ${error.message}`);
             return res.status(500).json({ error: 'Error calculating investment return' }); // Send error response
@@ -133,7 +134,7 @@ app.get('/api/portfolio', (req, res) => {
     const riskTolerance = req.query.risk_tolerance || 5;
 
     // Run the Python script with the risk tolerance as an argument
-    exec(`python src/server/allocations.py ${riskTolerance}`, (error, stdout, stderr) => {
+    exec(`${pycmd} src/server/allocations.py ${riskTolerance}`, (error, stdout, stderr) => {
         if (error) {
             console.error('Error executing Python script:', error);
             return res.status(500).json({ error: 'Error executing Python script' });

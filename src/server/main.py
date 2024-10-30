@@ -1,6 +1,7 @@
 import yfinance as yf  # Library for fetching financial data from Yahoo Finance
 import scrapers as scrapers  # Custom scrapers for fetching financial metrics
 import sqlite3  # SQLite library for database operations
+import os
 
 # This script fetches financial data for the top companies, specifically the 
 # price-to-earnings (P/E) ratio and return on capital (ROC), ranks them, 
@@ -38,7 +39,9 @@ sheets_list = [
 ]
 
 # Connect to SQLite database (create if it doesn't exist)
-conn = sqlite3.connect('data\companies.db')
+base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # Go up two levels
+db_path = os.path.join(base_dir, 'data', 'companies.db')
+conn = sqlite3.connect(db_path)
 c = conn.cursor()
 
 # Create table to store company data, including the exchange column
