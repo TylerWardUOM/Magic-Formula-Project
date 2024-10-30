@@ -4,6 +4,7 @@
   "description": "A brief description of your app",
   "main": "server.js",
   "scripts": {
+    "build": "npm rebuild sqlite3",
     "start": "node src/server/server.js"
   },
   "dependencies": {
