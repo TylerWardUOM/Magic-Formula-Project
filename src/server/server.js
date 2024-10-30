@@ -133,7 +133,7 @@ app.get('/api/portfolio', (req, res) => {
     const riskTolerance = req.query.risk_tolerance || 5;
 
     // Run the Python script with the risk tolerance as an argument
-    exec(`py src/server/allocations.py ${riskTolerance}`, (error, stdout, stderr) => {
+    exec(`python src/server/allocations.py ${riskTolerance}`, (error, stdout, stderr) => {
         if (error) {
             console.error('Error executing Python script:', error);
             return res.status(500).json({ error: 'Error executing Python script' });
