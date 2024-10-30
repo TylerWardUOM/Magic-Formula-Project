@@ -60,7 +60,7 @@ cron.schedule('* 16 * * *', () => {
 app.get('/api/run_script', (req, res) => {
     console.log('Received request to run Python script...');
 
-    exec(`py ${pythonScriptPath}`, (error, stdout, stderr) => {
+    exec(`python ${pythonScriptPath}`, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error executing Python script: ${error.message}`);
             return res.status(500).send('Failed to execute script'); // Send error response
@@ -83,7 +83,7 @@ app.post('/api/investment', (req, res) => {
     const inputData = JSON.stringify({ initialCapital, age, riskTolerance, yearlyContribution, benchmark });
 
     // Call the Python script
-    exec(`py src/server/investment_return_calculator.py "${inputData.replace(/"/g, '\\"')}"`, (error, stdout, stderr) => {
+    exec(`python src/server/investment_return_calculator.py "${inputData.replace(/"/g, '\\"')}"`, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error executing Python script: ${error.message}`);
             return res.status(500).json({ error: 'Error calculating investment return' }); // Send error response
