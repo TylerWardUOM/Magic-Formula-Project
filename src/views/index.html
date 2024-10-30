@@ -1,72 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding for the HTML document -->
     <meta charset="UTF-8">
-    <title>Magic Formula</title>
-    <link rel="icon" href="/public/images/th.jpg" type="image/x-icon">
-    <link rel="stylesheet" href="/src/styles/styles.css"> <!-- Link to external CSS -->
+    <title>Magic Formula</title> <!-- Title displayed in the browser tab -->
+    <link rel="icon" href="/public/images/th.jpg" type="image/x-icon"> <!-- Favicon for the webpage -->
+    <link rel="stylesheet" href="/src/styles/styles.css"> <!-- Link to external CSS for styling -->
 </head>
 <body>
 
-<!-- Load header from header.html -->
+<!-- Load header content from an external HTML file -->
 <div id="header"></div>
 
 <script>
-    fetch("partials/header.html")
-        .then(response => response.text())
+    // Fetch and insert the header HTML content into the page
+    fetch("/src/views/partials/header.html")
+        .then(response => response.text()) // Convert response to text
         .then(data => {
-            document.getElementById("header").innerHTML = data;
+            document.getElementById("header").innerHTML = data; // Insert header content into the div
         });
 </script>
 
-<div class="content-container">
-    <div class="table-container">
+<div class="content-container"> <!-- Main container for the content -->
+    <div class="table-container"> <!-- Container for the ranking table -->
         <table>
             <tr>
-                <th class="Thead" colspan="3">RankTable</th>
+                <th class="Thead" colspan="3">RankTable</th> <!-- Table header with colspan for title -->
             </tr>
             <tr>
-                <td class="header N">Company</td>
-                <td class="header N">P/E Ratio</td>
-                <td class="header N">ROC</td>
+                <td class="header N">Company</td> <!-- Column header for Company -->
+                <td class="header N">P/E Ratio</td> <!-- Column header for P/E Ratio -->
+                <td class="header N">ROC</td> <!-- Column header for Return on Capital -->
             </tr>
-            <tbody id="tableBody">
-                <!-- Rows inserted by JavaScript -->
+            <tbody id="tableBody"> <!-- Body of the table where data will be dynamically inserted -->
+                <!-- Rows will be inserted by JavaScript -->
             </tbody>
-            <script type="module" src="\src\scripts\Data_Sql.js"></script>
+            <script type="module" src="\src\scripts\Data_Sql.js"></script> <!-- Importing JavaScript for fetching data -->
         </table>
     </div>  
-    <div class="input-box">
-        <h2>Portfolio Suggestion and Insight</h2>
-        <form id="investmentForm" onsubmit="handleSubmit(event)">
+    
+    <div class="input-box"> <!-- Container for the investment input form -->
+        <h2>Portfolio Suggestion and Insight</h2> <!-- Title for the form section -->
+        <form id="investmentForm" onsubmit="handleSubmit(event)"> <!-- Form to capture user inputs -->
             <label for="capital">Initial Capital (£)</label>
-            <input type="number" id="capital" name="capital" placeholder="Enter your capital" required>
+            <input type="number" id="capital" name="capital" placeholder="Enter your capital" required> <!-- Input for initial capital -->
 
             <label for="age">Age</label>
-            <input type="number" id="age" name="age" placeholder="Enter your age">
+            <input type="number" id="age" name="age" placeholder="Enter your age"> <!-- Input for user's age -->
 
             <label for="riskTolerance">Risk Tolerance (1-10)</label>
-            <input type="number" id="riskTolerance" name="riskTolerance" min="1" max="10" placeholder="1-10">
- 
-            
+            <input type="number" id="riskTolerance" name="riskTolerance" min="1" max="10" placeholder="1-10"> <!-- Input for risk tolerance -->
+
             <label for="contribution">Yearly Contribution (£)</label>
-            <input type="number" id="contribution" name="contribution" placeholder="Enter your contribution" required>
+            <input type="number" id="contribution" name="contribution" placeholder="Enter your contribution" required> <!-- Input for yearly contribution -->
 
             <label for="benchmark">Benchmark</label>
-            <select id="benchmark" name="benchmark">
+            <select id="benchmark" name="benchmark"> <!-- Dropdown for selecting a benchmark -->
                 <option value="sp500">S&P 500</option>
                 <option value="gold">Gold</option>
                 <option value="magicFormula">Magic Formula (5 years)</option>
             </select>
 
-            <button id="submit-button" type="submit">Submit</button>
+            <button id="submit-button" type="submit">Submit</button> <!-- Submit button for the form -->
         </form>
-        <div id="results"></div>
+        <div id="results"></div> <!-- Div to display results after form submission -->
     </div>
-    <script src="..\scripts\script.js"></script> <!-- Optional JS for form handling -->
-    </div>
-</div>
 
+    <script src="/src/scripts/script.js"></script> <!-- Optional JavaScript for handling form submission and results -->
+</div>
 
 </body>
 </html>

@@ -1,7 +1,11 @@
-import requests
-from bs4 import BeautifulSoup
+import requests  # Library for making HTTP requests
+from bs4 import BeautifulSoup  # Library for parsing HTML content
+
+# This module contains functions to scrape financial metrics such as 
+# Return on Capital (ROC) and Price-to-Earnings (P/E) ratio from Google Finance.
 
 def scrape_roc(ticker, exchange):
+    """Fetches the Return on Capital (ROC) for a given stock ticker and exchange."""
     # Build the URL using both the ticker and exchange
     url = f'https://www.google.com/finance/quote/{ticker}:{exchange}'
     
@@ -10,7 +14,7 @@ def scrape_roc(ticker, exchange):
 
     # Check if the request was successful
     if response.status_code != 200:
-        return "Error fetching the data"
+        return "Error fetching the data"  # Return error message if request fails
 
     # Parse the HTML content
     html = response.text
@@ -19,23 +23,20 @@ def scrape_roc(ticker, exchange):
     # Try to find the "Return on capital" (ROC) value
     try:
         # Find the table cell containing the ROC value
-        roc_label = soup.find(text="Return on capital")
-        roc_value = roc_label.find_next('td').text.strip() if roc_label else None
+        roc_label = soup.find(text="Return on capital")  # Locate the label
+        roc_value = roc_label.find_next('td').text.strip() if roc_label else None  # Get the next td element's text
 
         if roc_value:
-            # Remove the percentage sign and convert to a number
+            # Remove the percentage sign and convert to a float
             roc_value = float(roc_value.replace('%', '').strip())
             return roc_value  # Return the value as a number
         else:
-            return "ROC data not found"
+            return "ROC data not found"  # Return message if ROC data is not found
     except Exception as e:
-        return f"An error occurred: {str(e)}"
-
-
-import requests
-from bs4 import BeautifulSoup
+        return f"An error occurred: {str(e)}"  # Return error message if exception occurs
 
 def scrape_pe_ratio(ticker, exchange):
+    """Fetches the Price-to-Earnings (P/E) ratio for a given stock ticker and exchange."""
     # Build the URL using the ticker and exchange
     url = f"https://www.google.com/finance/quote/{ticker}:{exchange}"
     
@@ -49,17 +50,16 @@ def scrape_pe_ratio(ticker, exchange):
         soup = BeautifulSoup(html, 'html.parser')
 
         # Find the P/E ratio element
-        pe_ratio_element = soup.find(text="P/E ratio")
+        pe_ratio_element = soup.find(text="P/E ratio")  # Locate the P/E ratio label
         
         if pe_ratio_element:
             # Navigate to the element that contains the P/E ratio value
-            pe_ratio_value = pe_ratio_element.find_next(class_="P6K39c").text.strip()
-            return float(pe_ratio_value)
+            pe_ratio_value = pe_ratio_element.find_next(class_="P6K39c").text.strip()  # Get the value
+            return float(pe_ratio_value)  # Convert to float and return
         else:
-            return None
+            return None  # Return None if P/E ratio element is not found
     
     except requests.RequestException as e:
-        return None
+        return None  # Return None if request fails
     except (ValueError, AttributeError) as e:
-        return None
-
+        return None  # Return None if there is an error in value conversion or attribute access
