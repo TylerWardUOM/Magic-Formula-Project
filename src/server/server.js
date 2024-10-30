@@ -16,12 +16,19 @@ const app = express(); // Create an Express application
 const PORT = process.env.PORT || 80; // Use PORT from env or default to 80
 const HOST = process.env.HOST || 'localhost'; // Use HOST from env or default to localhost
 const dbPath = path.join(__dirname, '../../data/companies.db'); // Path to the SQLite database
-const pythonScriptPath = 'main.py'; // Relative path to the Python script
+const pythonScriptPath = 'src/server/main.py'; // Relative path to the Python script
 
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Middleware to parse JSON request bodies
 
 console.log('Starting server...'); // Log to console when server starts
+
+// Endpoint to get the API base URL
+app.get('/api/config', (req, res) => {
+    res.json({
+        apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:80'
+    });
+});
 
 // Serve static files from the 'src/views' directory
 app.use(express.static(path.join(__dirname, '../../'))); 
@@ -76,7 +83,7 @@ app.post('/api/investment', (req, res) => {
     const inputData = JSON.stringify({ initialCapital, age, riskTolerance, yearlyContribution, benchmark });
 
     // Call the Python script
-    exec(`py investment_return_calculator.py "${inputData.replace(/"/g, '\\"')}"`, (error, stdout, stderr) => {
+    exec(`py src/server/investment_return_calculator.py "${inputData.replace(/"/g, '\\"')}"`, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error executing Python script: ${error.message}`);
             return res.status(500).json({ error: 'Error calculating investment return' }); // Send error response

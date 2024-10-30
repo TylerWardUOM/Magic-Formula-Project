@@ -1,3 +1,24 @@
+// Global variable to hold the API base URL
+let apiBaseUrl = 'http://localhost:80'; // Default value for local development
+
+// Function to fetch the API base URL from the server
+async function fetchApiBaseUrl() {
+    try {
+        const response = await fetch('/api/config'); // Fetch the config from your server
+        if (!response.ok) {
+            throw new Error('Failed to fetch configuration');
+        }
+        const config = await response.json(); // Parse the JSON response
+        apiBaseUrl = config.apiBaseUrl; // Set the global variable to the fetched API base URL
+        console.log(`API Base URL set to: ${apiBaseUrl}`); // Log the API base URL for debugging
+    } catch (error) {
+        console.error('Error fetching API base URL:', error); // Log any errors
+    }
+}
+
+// Call the fetchApiBaseUrl function to initialize the base URL
+fetchApiBaseUrl();
+
 // Asynchronous function to handle form submission
 async function handleSubmit(event) {
     event.preventDefault(); // Prevent the default form submission to avoid page reload
@@ -30,7 +51,7 @@ async function handleSubmit(event) {
 
     try {
         // Make an API request to submit the investment data
-        const response = await fetch('http://localhost:80/api/investment', {
+        const response = await fetch(`${apiBaseUrl}/api/investment`, { // Use the dynamic apiBaseUrl
             method: 'POST', // Use POST method for submitting data
             headers: {
                 'Content-Type': 'application/json' // Set content type to JSON

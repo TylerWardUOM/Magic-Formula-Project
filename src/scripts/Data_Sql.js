@@ -1,9 +1,20 @@
 // Front-end JavaScript to fetch and display company data in a table
 
-// Fetch company data from the API endpoint
-fetch('http://localhost:80/api/company_data')
+// Fetch the API base URL from the server
+fetch('/api/config') // Adjust to match your server endpoint
     .then(response => {
-        // Check if the response is okay (status 200-299)
+        if (!response.ok) {
+            throw new Error('Failed to fetch configuration');
+        }
+        return response.json();
+    })
+    .then(config => {
+        const apiBaseUrl = config.apiBaseUrl; // Extract the API base URL from the config
+        console.log(`Fetching data from: ${apiBaseUrl}/api/company_data`);
+
+        return fetch(`${apiBaseUrl}/api/company_data`); // Fetch company data using the API base URL
+    })
+    .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`); // Handle HTTP errors
         }
