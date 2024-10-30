@@ -40,8 +40,8 @@ app.get('/', (req, res) => {
 
 // Schedule to run the Python script at 4:00 PM EST every day
 // Note: Based on the server's time zone, this may need adjustment
-cron.schedule('* 16 * * *', () => {
-    console.log('Running Python script...');
+cron.schedule('00 16 * * *', () => {
+    console.log('Running Python script at:', new Date().toLocaleString());
 
     exec(`py ${pythonScriptPath}`, (error, stdout, stderr) => {
         if (error) {
@@ -126,6 +126,34 @@ app.get('/api/company_data', (req, res) => {
     });
 
     db.close(); // Close the database connection
+});
+
+app.get('/api/portfolio', (req, res) => {
+    // Get the risk tolerance from query parameters or default to 5
+    const riskTolerance = req.query.risk_tolerance || 5;
+
+    // Run the Python script with the risk tolerance as an argument
+    exec(`py src/server/allocations.py ${riskTolerance}`, (error, stdout, stderr) => {
+        if (error) {
+            console.error('Error executing Python script:', error);
+            return res.status(500).json({ error: 'Error executing Python script' });
+        }
+
+        if (stderr) {
+            console.error('Python script stderr:', stderr);
+            return res.status(500).json({ error: 'Python script returned an error' });
+        }
+
+        try {
+            // Parse the JSON output from Python script
+            const result = JSON.parse(stdout);
+            console.log('Data retrieved successfully');
+            res.json(result); // Send the result as JSON response
+        } catch (jsonError) {
+            console.error('Error parsing JSON:', jsonError);
+            return res.status(500).json({ error: 'Error parsing response from Python script' });
+        }
+    });
 });
 
 // Start the Express server

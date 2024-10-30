@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Allocation</title>
+    <link rel="stylesheet" href="/src/styles/styles.css">
+</head>
+<body>
+    <h1>Portfolio Allocation</h1>
+    <label for="risk-tolerance">Risk Tolerance (1-10): </label>
+    <input type="number" id="risk-tolerance" min="1" max="10" value="5">
+    <button onclick="loadPortfolioData()">Get Portfolio</button>
+
+    <table id="portfolioTable">
+        <thead>
+            <tr>
+                <th>Ticker</th>
+                <th>Allocation (%)</th>
+            </tr>
+        </thead>
+        <tbody id="portfolioTableBody">
+            <!-- Rows will be populated here -->
+        </tbody>
+    </table>
+
+    <script src="/src/scripts/script_portfolio.js"></script>
+</body>
+</html>

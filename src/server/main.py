@@ -1,5 +1,5 @@
 import yfinance as yf  # Library for fetching financial data from Yahoo Finance
-import src.server.scrapers as scrapers  # Custom scrapers for fetching financial metrics
+import scrapers as scrapers  # Custom scrapers for fetching financial metrics
 import sqlite3  # SQLite library for database operations
 
 # This script fetches financial data for the top companies, specifically the 
@@ -38,7 +38,7 @@ sheets_list = [
 ]
 
 # Connect to SQLite database (create if it doesn't exist)
-conn = sqlite3.connect('companies.db')
+conn = sqlite3.connect('data\companies.db')
 c = conn.cursor()
 
 # Create table to store company data, including the exchange column
